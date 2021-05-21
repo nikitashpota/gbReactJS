@@ -1,6 +1,6 @@
 import React from "react"
 import { Message } from "../message"
-import styles from "../../css/index.module.css"
+import styles from "../../index.module.css"
 
 export class MessageField extends React.Component {
   state = {
@@ -41,9 +41,12 @@ export class MessageField extends React.Component {
       {messages.map((message, index) => (
         <Message message={message} key={index} />
       ))}
-      <hr />
-      <input type="text" placeholder="..." ref={ref => this.input = ref}></input>
-      <button onClick={this.sendMessage}>Отправить</button>
+
+      <div className={styles.messager__block}>
+      <input className={styles.messager__input} type="text" placeholder="..." ref={ref => this.input = ref}></input>
+      <button className={styles.messager__button} onClick={this.sendMessage}>Отправить</button>
+      </div>
+
     </div >
   }
 }
