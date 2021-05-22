@@ -42,9 +42,9 @@ export class MessageField extends React.Component {
         <Message message={message} key={index} />
       ))}
 
-      <div className={styles.messager__block}>
-      <input className={styles.messager__input} type="text" placeholder="..." ref={ref => this.input = ref}></input>
-      <button className={styles.messager__button} onClick={this.sendMessage}>Отправить</button>
+      <div className={styles.messagerBlock}>
+      <input className={styles.messagerInput} type="text" placeholder="..." ref={ref => this.input = ref}></input>
+      <button className={styles.messagerButton} onClick={this.sendMessage}>Отправить</button>
       </div>
 
     </div >

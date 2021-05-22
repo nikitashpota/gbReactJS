@@ -15,9 +15,9 @@ export class Message extends React.Component {
         const { message } = this.props
         const { author, value } = message
             return (
-                <div className={styles.messager__userfield}>
-                    <h4 className={author === "Bot" ? classNames(styles.messager__author, styles.messager__author_right): styles.messager__author}>{author}</h4>
-                    <h3 className={styles.messager__text}>{value}</h3>
+                <div className={styles.messagerUserfield}>
+                    <h4 className={author === "Bot" ? classNames(styles.messagerAuthor, styles.messagerAuthorRight): styles.messagerAuthor}>{author}</h4>
+                    <h3 className={styles.messagerText}>{value}</h3>
                 </div>)
     }
 }

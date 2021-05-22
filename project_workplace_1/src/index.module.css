@@ -7,14 +7,14 @@
     width: 350px;
 }
 
-.messager__userfield {
+.messagerUserfield {
     margin: 0 0 8px;
     padding: 8px;
     border: 1px solid black;
     border-radius: 10px;
 }
 
-.messager__author {
+.messagerAuthor {
     margin: 0;
     font-size: 12px;
     line-height: 25px;
@@ -23,12 +23,12 @@
     color: #285070f1;
 }
 
-.messager__author_right {
+.messagerAuthorRight {
 
     text-align: right;
 }
 
-.messager__text {
+.messagerText {
     margin: 0;
     font-size: 16px;
     line-height: 25px;
@@ -37,19 +37,19 @@
     color: #000000;
 }
 
-.messager__input {
+.messagerInput {
     flex-grow: 2;
     min-height: 23px;
     border-radius: 10px;
     border: 1px solid;
 }
 
-.messager__block {
+.messagerBlock {
     display: flex;
     gap: 10px;
 }
 
-.messager__button {
+.messagerButton {
     border-radius: 10px;
     border: none;
     background-color: #7ce0fff8;
