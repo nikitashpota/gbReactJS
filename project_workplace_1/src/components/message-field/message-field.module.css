@@ -1,0 +1,51 @@
+.messager {
+    margin: 15px;
+    min-width: 250px;
+}
+
+.messagerUserfield {
+    margin: 0 0 8px;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.messagerAuthor {
+    margin: 0;
+    font-size: 12px;
+    line-height: 25px;
+    font-weight: 900;
+    font-style: normal;
+    color: #285070f1;
+}
+
+.messagerAuthorRight {
+
+    text-align: right;
+}
+
+.messagerText {
+    margin: 0;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 900;
+    font-style: normal;
+    color: #000000;
+}
+
+.messagerInput {
+    flex-grow: 2;
+    min-height: 23px;
+    /* border-radius: 10px; */
+    border: none;
+}
+
+.messagerBlock {
+    display: flex;
+    gap: 10px;
+}
+
+.messagerButton {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}

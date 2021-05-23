@@ -1,37 +1,45 @@
 import React from "react"
 import { Message } from "../message"
-import styles from "../../index.module.css"
+import styles from "./message-field.module.css"
+import { Input,InputAdornment,withStyles } from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send'
 
 export class MessageField extends React.Component {
   state = {
-    messages: [],
+    messages: [{ author: "Bot", value: "Привет!" }],
+    value: "",
   }
-
-  componentDidUpdate() {
-
+  
+  componentDidUpdate(_, state) {
     const { messages } = this.state
 
     let lastMessage = messages[messages.length - 1]
     let { author } = lastMessage
     let { value } = lastMessage
 
-    if (author !== undefined && author !== "Bot") {
+    if (author !== undefined && author !== "Bot" && state.messages !== messages) {
       setTimeout(() => {
         this.setState({
           messages: [...messages, { author: "Bot", value: `${author} написал: "${value}"` }],
         })
-      }, 1000)
-    }
+      }, 5000)
 
+    }
   }
 
   sendMessage = () => {
-    const { messages } = this.state
-    let text = this.input.value
+    const messages = this.state.messages
+    let value = this.state.value
     this.setState({
-      messages: [...messages, { author: "User", value: text }],
+      messages: [...messages, { author: "User", value: value }],
+      value: ""
     })
-    this.input.value = ""
+  }
+
+  handlerPressInput = ({code}) =>{
+    const value = this.state.value
+    if(code === "Enter")
+      {this.sendMessage}
   }
 
   render() {
@@ -43,8 +51,19 @@ export class MessageField extends React.Component {
       ))}
 
       <div className={styles.messagerBlock}>
-      <input className={styles.messagerInput} type="text" placeholder="..." ref={ref => this.input = ref}></input>
-      <button className={styles.messagerButton} onClick={this.sendMessage}>Отправить</button>
+      <Input className={styles.messagerInput}
+        type="text" placeholder="..." 
+        value = {this.state.value} 
+        onChange={(e) => {this.setState({value: e.target.value} )}}
+        onKeyPress={this.handlerPressInput}
+        endAdornment={
+          <InputAdornment position="end">
+              <SendIcon className={styles.messagerButton} onClick={this.sendMessage}></SendIcon>
+          </InputAdornment>
+        }
+      ></Input>
+
+      
       </div>
 
     </div >
