@@ -1,9 +1,10 @@
 .messager {
-    margin: 15px;
-    min-width: 250px;
+    grid-column: span 10;
+    margin: 0;
 }
 
 .messagerUserfield {
+    font: inherit;
     margin: 0 0 8px;
     padding: 8px;
     border: 1px solid black;
@@ -11,6 +12,7 @@
 }
 
 .messagerAuthor {
+    font: inherit;
     margin: 0;
     font-size: 12px;
     line-height: 25px;
@@ -25,6 +27,7 @@
 }
 
 .messagerText {
+    font: inherit;
     margin: 0;
     font-size: 16px;
     line-height: 25px;
@@ -41,6 +44,7 @@
 }
 
 .messagerBlock {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     display: flex;
     gap: 10px;
 }
