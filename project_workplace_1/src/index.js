@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Layout } from "./components"
+
+import { Layout, MessageField, ChatList, Header } from "./components"
 import styles from "./index.module.css"
 import { ThemeProvider, createMuiTheme } from "@material-ui/core"
 
@@ -9,7 +10,7 @@ const theme = createMuiTheme({})
 const App = () => {
   return (
     <div>
-      <Layout />
+      <Layout header={<Header />} chatList={<ChatList />} messageField={<MessageField />} />
     </div>
   )
 }

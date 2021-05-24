@@ -48,11 +48,11 @@ module.exports = {
           isDevelopment
             ? "style-loader"
             : {
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                  publicPath: path.resolve(__dirname, "build/css"),
-                },
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: path.resolve(__dirname, "build/css"),
               },
+            },
 
           {
             loader: "css-loader",
@@ -66,6 +66,11 @@ module.exports = {
         test: /\.js(x?)$/,
         exclude: /node_modules/,
         use: "babel-loader",
+      },
+      {
+        exclude: "/node_modules/",
+        test: /\.jpg$/,
+        use: ['file-loader'],
       },
     ],
   },

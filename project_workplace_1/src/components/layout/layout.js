@@ -6,9 +6,9 @@ export class Layout extends React.Component {
     render() {
         return (
             <div className={styles.layoutGrid}>
-                <Header />
-                <ChatList />
-                <MessageField />
+                {this.props.header}
+                {this.props.chatList}
+                {this.props.messageField}
             </div>
         )
     }
