@@ -8,16 +8,17 @@ export class Message extends React.Component {
         message: PropTypes.shape({
             message: PropTypes.string,
             value: PropTypes.string,
-
+            data: PropTypes.string,
         })
     }
     render() {
         const { message } = this.props
-        const { author, value } = message
+        const { author, value, data } = message
             return (
                 <div className={styles.messagerUserfield}>
                     <h4 className={author === "Bot" ? classNames(styles.messagerAuthor, styles.messagerAuthorRight): styles.messagerAuthor}>{author}</h4>
                     <h3 className={styles.messagerText}>{value}</h3>
+                    <p className={styles.messagerData}>{data}</p>
                 </div>)
     }
 }

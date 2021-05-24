@@ -6,32 +6,33 @@ import SendIcon from '@material-ui/icons/Send'
 
 export class MessageField extends React.Component {
   state = {
-    messages: [{ author: "Bot", value: "Привет!" }],
+    messages: [{ author: "Bot", value: "Привет!", data:new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})}],
     value: "",
   }
   
   componentDidUpdate(_, state) {
     const { messages } = this.state
 
-    let lastMessage = messages[messages.length - 1]
-    let { author } = lastMessage
-    let { value } = lastMessage
-
+    const lastMessage = messages[messages.length - 1]
+    const { author } = lastMessage
+    const { value } = lastMessage
+    const data = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})
     if (author !== undefined && author !== "Bot" && state.messages !== messages) {
       setTimeout(() => {
         this.setState({
-          messages: [...messages, { author: "Bot", value: `${author} написал: "${value}"` }],
+          messages: [...messages, { author: "Bot", value: `${author} написал: "${value}"`, data: data }],
         })
-      }, 5000)
+      }, 700)
 
     }
   }
 
   sendMessage = () => {
     const messages = this.state.messages
-    let value = this.state.value
+    const value = this.state.value
+    const data = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})
     this.setState({
-      messages: [...messages, { author: "User", value: value }],
+      messages: [...messages, { author: "User", value: value, data: data }],
       value: ""
     })
   }
@@ -61,11 +62,8 @@ export class MessageField extends React.Component {
               <SendIcon className={styles.messagerButton} onClick={this.sendMessage}></SendIcon>
           </InputAdornment>
         }
-      ></Input>
-
-      
+      ></Input>   
       </div>
-
     </div >
   }
 }

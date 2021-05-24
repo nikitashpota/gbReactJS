@@ -45,9 +45,11 @@
     gap: 10px;
 }
 
-.messagerButton {
-    /* border-radius: 10px;
-    border: none;
-    background-color: #7ce0fff8;
-    color: rgb(34, 36, 36); */
+.messagerData{
+    margin: 0;
+    font-size: 8px;
+    line-height: 25px;
+    font-weight: 900;
+    font-style: normal;
+    color: #5d7c96f1; 
 }
