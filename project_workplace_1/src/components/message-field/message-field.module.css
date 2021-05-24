@@ -2,8 +2,12 @@
     display: flex;
     grid-column: span 10;
     margin: 0;
+    padding: 10px;
     flex-direction: column;
     align-items: flex-start;
+    /* background: radial-gradient(#c9b0b0, #ffffff); */
+    /* background-image: url(../../resource/img/backmessagefield.jpg);
+    background-size:auto; */
 }
 
 .messagerInput {
@@ -20,9 +24,12 @@
 .messagerUserfield {
     margin: 0 0 8px;
     padding: 8px;
-    border: 1px solid black;
+    /* border: 1px solid black;
+    border-radius: 10px; */
+    background-color: white;
     border-radius: 10px;
-    width: 75%;
+    box-shadow: 3px 1px 7px 0px rgb(0 0 0 / 17%);
+    width: 93%;
 }
 
 .messagerUserfieldRight {

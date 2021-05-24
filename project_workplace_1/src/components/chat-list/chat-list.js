@@ -2,6 +2,7 @@ import React from "react"
 import { Chat } from "../chat"
 import PropTypes from "prop-types"
 import styles from "./chat-list.module.css"
+import List from '@material-ui/core/List';
 
 // @TODO сделать propTypes //Does
 export class ChatList extends React.Component {
@@ -11,7 +12,7 @@ export class ChatList extends React.Component {
     })
   }
   state = {
-    chats: ["room1", "room2", "room3"],
+    chats: ["Чат 1", "Чат 2", "Чат 3", "Чат 4", "Чат 5"],
     selectedIndex: 0,
   }
 
@@ -19,12 +20,12 @@ export class ChatList extends React.Component {
     const { chats, selectedIndex } = this.state
 
     return (
-      <div className={styles.chatList}>
+      <List className={styles.chatList}>
         {chats.map((chat, index) => (
           // @TODO доделать Chat //Doesn't
           <Chat title={chat} key={index} selected={selectedIndex} />
         ))}
-      </div>
+      </List>
     )
   }
 }
