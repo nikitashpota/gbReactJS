@@ -1,5 +1,5 @@
 import React from "react"
-import { Chat } from "../chat"
+import { Chat } from "./chat"
 import PropTypes from "prop-types"
 import styles from "./chat-list.module.css"
 import List from '@material-ui/core/List';
