@@ -1,66 +1,82 @@
-import React from "react"
+import { InputAdornment, Input, withStyles } from "@material-ui/core"
+import { Send } from "@material-ui/icons"
+import classnames from "classnames"
+import React, { Component, createRef } from "react"
 import { Message } from "./message"
 import styles from "./message-field.module.css"
-import { Input, InputAdornment, withStyles } from '@material-ui/core'
-import SendIcon from '@material-ui/icons/Send'
+import { MessagesNotFound } from "./messages-not-found"
 
-export class MessageField extends React.Component {
-  state = {
-    messages: [{ author: "Bot", value: "Привет!", data: new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) }],
-    value: "",
+const StyledInput = withStyles(() => ({
+  root: {
+    "&": {
+      color: "#9a9fa1",
+      padding: "10px 15px",
+      fontSize: " 15px",
+    },
+  },
+}))(Input)
+export class MessageField extends Component {
+  ref = createRef()
+
+  handleChangeInput = (e) => {
+    this.props.handleChangeValue(e)
   }
 
-  componentDidUpdate(_, state) {
-    const { messages } = this.state
-
-    const lastMessage = messages[messages.length - 1]
-    const { author } = lastMessage
-    const { value } = lastMessage
-    const data = new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })
-    if (author !== undefined && author !== "Bot" && state.messages !== messages) {
-      setTimeout(() => {
-        this.setState({
-          messages: [...messages, { author: "Bot", value: `${author} написал: "${value}"`, data: data }],
-        })
-      }, 700)
+  handlePressInput = ({ code }) => {
+    if (code === "Enter") {
+      this.handleSendMessage()
     }
   }
 
-  sendMessage = (value = "ss") => {
-    const messages = this.state.messages
-    // const value = this.state.value
-    const data = new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })
-    this.setState({
-      messages: [...messages, { author: "User", value: value, data: data }],
-      value: ""
-    })
+  handleSendMessage = () => {
+    const { sendMessage, value } = this.props
+
+    sendMessage({ author: "User", message: value })
   }
 
-  handlerPressInput = (event) => {
-    if (event.code == "Enter") {
-      this.sendMessage(this.state.value)
-      console.log(this.state.value)
+  handleScrollBottom = () => {
+    if (this.ref.current) {
+      this.ref.current.scrollTo(0, this.ref.current.scrollHeight)
     }
+  }
+
+  componentDidUpdate() {
+    this.handleScrollBottom()
   }
 
   render() {
-    const { messages, value } = this.state
-    return <div className={styles.messager}>
-      {messages.map((message, index) => (
-        <Message message={message} key={index} />
-      ))}
+    const { messages, value } = this.props
 
-      <Input className={styles.messagerInput}
-        type="text" placeholder="..."
-        value={this.state.value}
-        onChange={(e) => { this.setState({ value: e.target.value }) }}
-        onKeyUp={(event) => this.handlerPressInput(event)}
-        endAdornment={
-          <InputAdornment position="end">
-            <SendIcon className={styles.messagerButton} onClick={() => { this.sendMessage(this.state.value) }}></SendIcon>
-          </InputAdornment>
-        }
-      ></Input>
-    </div >
+    return (
+      <>
+        <div ref={this.ref}>
+          {!messages.length ? (
+            <MessagesNotFound />
+          ) : (
+            messages.map((message, index) => (
+              <Message message={message} key={index} />
+            ))
+          )}
+        </div>
+
+        <StyledInput
+          fullWidth={true}
+          placeholder="Введите сообщение..."
+          value={value}
+          onChange={this.handleChangeInput}
+          onKeyPress={this.handlePressInput}
+          endAdornment={
+            <InputAdornment position="end">
+              {value && (
+                <Send
+                  className={classnames(styles.icon)}
+                  onClick={this.handleSendMessage}
+                />
+              )}
+            </InputAdornment>
+          }
+        />
+      </>
+    )
   }
 }

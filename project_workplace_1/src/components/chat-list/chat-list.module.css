@@ -2,3 +2,8 @@
     margin: 0px 0 0 16px;
     grid-column: span 2;
 }
+
+.Button {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
