@@ -1,0 +1,6 @@
+.layoutGrid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 50px;
+    background: radial-gradient(#8eafc5, #ffffff);
+}
