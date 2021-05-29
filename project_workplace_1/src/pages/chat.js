@@ -10,45 +10,10 @@ import {
 } from "../components"
 
 export class Chat extends Component {
-  componentDidMount() {
-    document.addEventListener("keydown", this.listenExistChat)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.listenExistChat)
-  }
-
-  listenExistChat = ({ code }) => {
-    if (code === "Escape") {
-      const { history } = this.props
-      history.push("/chat")
-    }
-  }
-
   render() {
     return (
       <Switch>
-        <Route path={["/chat/:roomId", "/chat"]}>
-          {(params) => (
-            <MessageProvider {...params}>
-              {([state, actions]) => {
-                return (
-                  <Layout
-                    header={<Header />}
-                    chats={<ChatList {...params} {...state} />}
-                  >
-                    <Route path="/chat/:roomId">
-                      <MessageField {...state} {...actions} />
-                    </Route>
-                    <Route exact={true} path="/chat">
-                      <MessagesNotFound />
-                    </Route>
-                  </Layout>
-                )
-              }}
-            </MessageProvider>
-          )}
-        </Route>
+        <Route path={["/chat/:roomId", "/chat"]} component={Common} />
         <Route
           exact={true}
           path="*"
@@ -56,5 +21,19 @@ export class Chat extends Component {
         />
       </Switch>
     )
+  }
+}
+
+class Common extends React.Component {
+  render() {
+    // получаем параметры
+    const id = this.props.match?.params.roomId;
+    console.log("this.props.match");
+    console.log(this.props.match);
+    return (
+      <h2>
+        id: {id}
+      </h2>
+    );
   }
 }

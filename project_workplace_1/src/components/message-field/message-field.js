@@ -1,82 +1,71 @@
-import { InputAdornment, Input, withStyles } from "@material-ui/core"
-import { Send } from "@material-ui/icons"
-import classnames from "classnames"
-import React, { Component, createRef } from "react"
+import React from "react"
 import { Message } from "./message"
 import styles from "./message-field.module.css"
-import { MessagesNotFound } from "./messages-not-found"
+import { Input, InputAdornment, withStyles } from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send'
 
-const StyledInput = withStyles(() => ({
-  root: {
-    "&": {
-      color: "#9a9fa1",
-      padding: "10px 15px",
-      fontSize: " 15px",
-    },
-  },
-}))(Input)
-export class MessageField extends Component {
-  ref = createRef()
-
-  handleChangeInput = (e) => {
-    this.props.handleChangeValue(e)
+export class MessageField extends React.Component {
+  state = {
+    messages: [{ author: "Bot", value: "Привет!", data: new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }) }],
+    value: "",
   }
 
-  handlePressInput = ({ code }) => {
-    if (code === "Enter") {
-      this.handleSendMessage()
+  componentDidUpdate(_, state) {
+    const { messages } = this.state
+
+    const lastMessage = messages[messages.length - 1]
+    const { author } = lastMessage
+    const { value } = lastMessage
+    const data = new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })
+    if (author !== undefined && author !== "Bot" && state.messages !== messages) {
+      setTimeout(() => {
+        this.setState({
+          messages: [...messages, { author: "Bot", value: `${author} написал: "${value}"`, data: data }],
+        })
+      }, 700)
     }
   }
 
-  handleSendMessage = () => {
-    const { sendMessage, value } = this.props
+  sendMessage = (value = "ss") => {
+    const messages = this.state.messages
 
-    sendMessage({ author: "User", message: value })
+    // if (!messages.value) {
+    //   return
+    // }
+
+    // const value = this.state.value
+    const data = new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })
+    this.setState({
+      messages: [...messages, { author: "User", value: value, data: data }],
+      value: ""
+    })
   }
 
-  handleScrollBottom = () => {
-    if (this.ref.current) {
-      this.ref.current.scrollTo(0, this.ref.current.scrollHeight)
+  handlerPressInput = (event) => {
+    if (event.code == "Enter") {
+      this.sendMessage(this.state.value)
+      console.log(this.state.value)
     }
-  }
-
-  componentDidUpdate() {
-    this.handleScrollBottom()
   }
 
   render() {
-    const { messages, value } = this.props
+    const { messages, value } = this.state
+    return <div className={styles.messager}>
+      {messages.map((message, index) => (
+        <Message message={message} key={index} />
+      ))}
 
-    return (
-      <>
-        <div ref={this.ref}>
-          {!messages.length ? (
-            <MessagesNotFound />
-          ) : (
-            messages.map((message, index) => (
-              <Message message={message} key={index} />
-            ))
-          )}
-        </div>
-
-        <StyledInput
-          fullWidth={true}
-          placeholder="Введите сообщение..."
-          value={value}
-          onChange={this.handleChangeInput}
-          onKeyPress={this.handlePressInput}
-          endAdornment={
-            <InputAdornment position="end">
-              {value && (
-                <Send
-                  className={classnames(styles.icon)}
-                  onClick={this.handleSendMessage}
-                />
-              )}
-            </InputAdornment>
-          }
-        />
-      </>
-    )
+      <Input className={styles.messagerInput}
+        type="text" placeholder="..."
+        value={this.state.value}
+        onChange={(e) => { this.setState({ value: e.target.value }) }}
+        onKeyUp={(event) => this.handlerPressInput(event)}
+        endAdornment={
+          <InputAdornment position="end">
+            <SendIcon className={styles.messagerButton} onClick={() => { this.sendMessage(this.state.value) }}></SendIcon>
+          </InputAdornment>
+        }
+      ></Input>
+    </div >
   }
 }
