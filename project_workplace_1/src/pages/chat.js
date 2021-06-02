@@ -13,7 +13,7 @@ export class Chat extends Component {
   render() {
     return (
       <Switch>
-        <Route path={["/chat/:roomId", "/chat"]} component={Common} />
+        <Route path="/chat" component={(props) => <MessageProvider {...props} />}></Route>
         <Route
           exact={true}
           path="*"
@@ -24,16 +24,3 @@ export class Chat extends Component {
   }
 }
 
-class Common extends React.Component {
-  render() {
-    // получаем параметры
-    const id = this.props.match?.params.roomId;
-    console.log("this.props.match");
-    console.log(this.props.match);
-    return (
-      <h2>
-        id: {id}
-      </h2>
-    );
-  }
-}

@@ -28,12 +28,6 @@ export class MessageField extends React.Component {
 
   sendMessage = (value = "ss") => {
     const messages = this.state.messages
-
-    // if (!messages.value) {
-    //   return
-    // }
-
-    // const value = this.state.value
     const data = new Date().toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' })
     this.setState({
       messages: [...messages, { author: "User", value: value, data: data }],

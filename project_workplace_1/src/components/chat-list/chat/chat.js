@@ -11,8 +11,7 @@ export class Chat extends React.Component {
         })
     }
     render() {
-    const { title, handleListItemClick, selected } = this.props
-    // handleListItemClick нужен для <ListItem handleListItemClick selected/> (из материал)
-    return <ListItem button><ListItemText primary={title}/></ListItem>
+        const { title, handleListItemClick, selected } = this.props
+        return <ListItem button><ListItemText primary={title} /></ListItem>
     }
 }
