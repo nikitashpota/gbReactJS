@@ -13,13 +13,13 @@ export class Message extends React.Component {
     }
     render() {
         const { message } = this.props
-        const { author, value, data } = message
+        const { author, messageText, data } = message
 
 
         return (
             <div className={author === "Bot" ? classNames(styles.messagerUserfield, styles.messagerUserfieldRight) : styles.messagerUserfield}>
                 <h4 className={styles.messagerAuthor}>{author}</h4>
-                <h3 className={styles.messagerText}>{value}</h3>
+                <h3 className={styles.messagerText}>{messageText}</h3>
                 <p className={styles.messagerData}>{data}</p>
             </div>)
     }

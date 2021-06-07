@@ -5,22 +5,28 @@ import styles from "./chat-list.module.css"
 import List from '@material-ui/core/List';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom"
 
-// @TODO сделать propTypes //Does
 export class ChatList extends React.Component {
-  state = {
-    chats: ["Чат 1", "Чат 2", "Чат 3", "Чат 4", "Чат 5"],
-    selectedIndex: 0,
-  }
 
   render() {
-    const { chats, selectedIndex } = this.state
+    const { conversations, match: { params } } = this.props
+    const chatId = params.roomId
 
     return (
-      <List className={styles.chatList}>
-        {chats.map((chat, index) => (
-          <Chat title={chat} key={index} selected={selectedIndex} />
-        ))}
-      </List>
+      <>
+        < List className={styles.chatList} >
+          {
+            conversations.map((chat) => {
+              return (
+                <Link key={chat.title} to={`/chat/${chat.title}`}>
+                  <Chat
+                    selected={chat.title === chatId}
+                    chat={chat}
+                  />
+                </Link>
+              )
+            })
+          }</List >
+      </>
     )
   }
 }

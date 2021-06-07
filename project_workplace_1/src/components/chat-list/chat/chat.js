@@ -5,13 +5,9 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 export class Chat extends React.Component {
-    static propTypes = {
-        chat: PropTypes.shape({
-            titel: PropTypes.string,
-        })
-    }
     render() {
-        const { title, handleListItemClick, selected } = this.props
+        const { chat, selected } = this.props
+        const { title } = chat
         return <ListItem button><ListItemText primary={title} /></ListItem>
     }
 }

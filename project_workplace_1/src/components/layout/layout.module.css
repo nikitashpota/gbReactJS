@@ -2,5 +2,5 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 50px;
-    background: radial-gradient(#000000, #616161);
+    background: radial-gradient(#ffffff, #ffffff);
 }

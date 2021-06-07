@@ -15,22 +15,26 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <Link to="/chat/room1/">Test1</Link>
       <Link to="/chat/room2/">Test2</Link>
+
       <Switch>
-        <Route path={["/chat/:roomId", "/chat"]}>
-          {(params) => {
-            <MessageProvider>
-              {([state, actions]) => (<div><Layout header={<Header />}
-                chats={<ChatList />} messages={<MessageField />} />
-              </div>
-              )}
-            </MessageProvider>
+        <Route path="/chat/:roomId" component={(props) =>
+          <MessageProvider {...props}>{([state, actions]) => {
+            return (<>
+              {console.log(actions)}
+              <Layout
+                header={<Header />}
+                chats={<ChatList {...props} {...state} />}
+              ><Route path='/chat/:roomId'>
+                  {<MessageField {...state}{...actions} />}
+                </Route>
+              </Layout>
+            </>)
           }}
+          </MessageProvider>}>
         </Route>
-        <Route path="*" component={() => <h1>404</h1>} />
+        {/* <Route path="*" component={() => <h1>404</h1>} /> */}
       </Switch>
     </ThemeProvider>
   </BrowserRouter>,
   document.getElementById("root"),
 )
-{/* <Layout header={<Header />}
-          chats={<ChatList />} messages={<MessageField />}{...props} />} */}
