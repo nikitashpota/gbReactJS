@@ -1,0 +1,64 @@
+.messager {
+    display: flex;
+    grid-column: span 10;
+    margin: 0;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    /* background: radial-gradient(#c9b0b0, #ffffff); */
+    /* background-image: url(../../resource/img/backmessagefield.jpg);
+    background-size:auto; */
+}
+
+.messagerInput {
+    width: 100%;
+    min-height: 23px;
+    border: none;
+}
+
+.messagerButton {
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+
+.messagerUserfield {
+    margin: 0 0 8px;
+    padding: 8px;
+    /* border: 1px solid black;
+    border-radius: 10px; */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 1px 7px 0px rgb(0 0 0 / 17%);
+    width: 93%;
+}
+
+.messagerUserfieldRight {
+    align-self: flex-end;
+}
+
+.messagerAuthor {
+    margin: 0;
+    font-size: 12px;
+    line-height: 25px;
+    font-weight: 900;
+    font-style: normal;
+    color: #285070f1;
+}
+
+.messagerText {
+    margin: 0;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 900;
+    font-style: normal;
+    color: #000000;
+}
+
+.messagerData {
+    margin: 0;
+    font-size: 10px;
+    line-height: 25px;
+    font-weight: 900;
+    font-style: normal;
+    color: #5d7c96f1;
+}
